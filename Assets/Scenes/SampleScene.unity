@@ -240,6 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9bd5d43a98a4686848cc10f078613b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anvilSpawner: {fileID: 2069162833}
 --- !u!4 &808893583
 Transform:
   m_ObjectHideFlags: 0
@@ -299,6 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe7cf03dc0b049c5874322aa8d48bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anvilPrefab: {fileID: 4690978407489187341, guid: 3323f70b369e24161b10016684cb44d4, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ public class AnvilSpawner : MonoBehaviour
         
     }
 
-    void DropAnvil()
+    public void DropAnvil()
     {
         Debug.Log("Dropping anvil...");
         // Instantiate at position (0, 0, 0) and zero rotation.
