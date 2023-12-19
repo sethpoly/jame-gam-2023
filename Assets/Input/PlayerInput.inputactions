@@ -1,0 +1,34 @@
+{
+    "name": "PlayerInput",
+    "maps": [
+        {
+            "name": "Map",
+            "id": "96264bfb-2cf8-49de-89ec-bca389f3c37f",
+            "actions": [
+                {
+                    "name": "Drop",
+                    "type": "Button",
+                    "id": "167e1a4b-ce30-414b-a02b-f14a5fd38352",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "761f8265-0a3d-468a-ba11-bb3ef4ce94ff",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
