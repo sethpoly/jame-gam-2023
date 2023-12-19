@@ -7,6 +7,8 @@ using System;
 public class PlayerController : MonoBehaviour
 {
     private PlayerInput playerInput;
+
+    [SerializeField] AnvilSpawner anvilSpawner;
     
     void Awake()
     {
@@ -34,5 +36,6 @@ public class PlayerController : MonoBehaviour
     private void OnDropPressed(InputAction.CallbackContext context)
     {
         Debug.Log("Drop pressed");
+        anvilSpawner.DropAnvil();
     }
 }
