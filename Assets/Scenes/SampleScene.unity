@@ -211,6 +211,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &640050369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 640050370}
+  - component: {fileID: 640050371}
+  m_Layer: 0
+  m_Name: ItemSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &640050370
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640050369}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.6, y: 1.24, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &640050371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640050369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b54199ed2ff7a4a5bba8cef768ec5d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  giftPrefab: {fileID: 8692199307935378503, guid: d28b0abae1e0b4ef68d48cfbe8d923d4, type: 3}
+  coalPrefab: {fileID: 7901710762788298157, guid: 9cdc2e3827aff4b03b6b6aa7ef276801, type: 3}
 --- !u!1 &808893581
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,9 +314,10 @@ GameObject:
   - component: {fileID: 1669964089}
   - component: {fileID: 1669964091}
   - component: {fileID: 1669964092}
+  - component: {fileID: 1669964093}
   m_Layer: 0
-  m_Name: Ground
-  m_TagString: Untagged
+  m_Name: Conveyor
+  m_TagString: Conveyor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -338,8 +385,8 @@ Transform:
   m_GameObject: {fileID: 1669964088}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.017, y: -1.3002, z: 0}
-  m_LocalScale: {x: -15.448727, y: 0.52330375, z: 1}
+  m_LocalPosition: {x: -1.1131, y: -1.3002, z: 0}
+  m_LocalScale: {x: -21.626684, y: 0.52330375, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -402,7 +449,7 @@ BoxCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
@@ -417,6 +464,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1669964093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669964088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b462224e7ae04afeba57366fd67ee07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
 --- !u!1 &2069162831
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +487,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2069162832}
   - component: {fileID: 2069162833}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AnvilSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -470,3 +530,4 @@ SceneRoots:
   - {fileID: 808893583}
   - {fileID: 2069162832}
   - {fileID: 1669964090}
+  - {fileID: 640050370}
