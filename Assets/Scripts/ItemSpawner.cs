@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,9 +23,24 @@ public class ItemSpawner : MonoBehaviour
         timePassed += Time.deltaTime;
         if(timePassed > timeToWait)
         {
-            DropGift();
+            DropRandom();
             timePassed = 0f;
         } 
+    }
+
+    private void DropRandom() {
+        Array values = Enum.GetValues(typeof(ItemType));
+        System.Random random = new();
+        ItemType randomItem = (ItemType)values.GetValue(random.Next(values.Length));
+
+        switch(randomItem) {
+            case ItemType.Gift: 
+            DropGift();
+            break;
+            case ItemType.Coal:
+            DropCoal();
+            break;
+        }
     }
 
     private void DropGift() {
