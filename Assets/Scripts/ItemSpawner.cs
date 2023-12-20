@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using Random=UnityEngine.Random;
 
 public class ItemSpawner : MonoBehaviour
 {
@@ -9,7 +11,7 @@ public class ItemSpawner : MonoBehaviour
     public GameObject coalPrefab;
 
     private float timePassed = 0f;
-    private float timeToWait = 2f;
+    private float timeToWait = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,7 @@ public class ItemSpawner : MonoBehaviour
         if(timePassed > timeToWait)
         {
             DropRandom();
+            timeToWait = GetRandomTimeToWait();
             timePassed = 0f;
         } 
     }
@@ -51,5 +54,9 @@ public class ItemSpawner : MonoBehaviour
     private void DropCoal() {
         Debug.Log("Dropping coal...");
         Instantiate(coalPrefab, transform);
+    }
+
+    private float GetRandomTimeToWait() {
+        return Random.Range(.5f, 2.5f);
     }
 }
