@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public DifficultyLevel difficultyLevel;
     public Difficulty currentDifficulty;
     public AnvilSpawnLocation anvilSpawnLocation;
+    public ItemType currentItemToCrush;
+
 
     // Start is called before the first frame update
     void Start()
