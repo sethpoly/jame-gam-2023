@@ -9,19 +9,12 @@ public class ItemSpawner : MonoBehaviour
 {
     public GameObject giftPrefab;
     public GameObject coalPrefab;
-
     private float timePassed = 0f;
     private float timeToWait = 0f;
 
     private ItemType lastItemDropped = ItemType.Coal;
     private int identicalItemDroppedInSequenceCount = 0;
-    private int maxIdenticalItemsToDrop = 3; // The max identical items we may drop in sequence of the conveyor
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private readonly int maxIdenticalItemsToDrop = 3; // The max identical items we may drop in sequence of the conveyor
 
     // Update is called once per frame
     void Update()

@@ -6,14 +6,7 @@ using UnityEngine;
 public class ConveyorObject : MonoBehaviour
 {
     private float speed = 0;
-    private Vector2 dir = Vector2.zero;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -36,7 +29,6 @@ public class ConveyorObject : MonoBehaviour
 
         // Start moving this object
         speed = conveyor.speed;
-        dir = conveyor.gameObject.transform.right;
     }
 
     /// Sent when a collider on another object stops touching this
@@ -51,6 +43,5 @@ public class ConveyorObject : MonoBehaviour
 
         // Stop moving object
         speed = 0;
-        dir = Vector2.zero;
     }
 }
