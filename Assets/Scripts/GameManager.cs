@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         new Difficulty(conveyorSpeed: 6, minItemSpawnTime: .5f, maxItemSpawnTime: 2.5f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
         new Difficulty(conveyorSpeed: 7, minItemSpawnTime: .5f, maxItemSpawnTime: 2.5f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
         new Difficulty(conveyorSpeed: 8, minItemSpawnTime: .5f, maxItemSpawnTime: 2.5f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
-        new Difficulty(conveyorSpeed: 9, minItemSpawnTime: .2f, maxItemSpawnTime: 1.2f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero)
+        new Difficulty(conveyorSpeed: 9, minItemSpawnTime: .1f, maxItemSpawnTime: .5f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero)
     };
 
     public DifficultyLevel difficultyLevel;
