@@ -13,9 +13,9 @@ TagManager:
   - Conveyor
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Background
+  - Crushable
+  - Anvil
   - 
   - 
   - 
@@ -40,6 +40,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 834149485
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
