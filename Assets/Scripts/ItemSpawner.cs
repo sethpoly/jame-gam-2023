@@ -5,9 +5,8 @@ using Unity.Mathematics;
 using UnityEngine;
 using Random=UnityEngine.Random;
 
-public class ItemSpawner : MonoBehaviour
+public class ItemSpawner : GameManagerObservable
 {
-    private GameManager gameManager;
     public GameObject giftPrefab;
     public GameObject coalPrefab;
     private float timePassed = 0f;
@@ -23,7 +22,7 @@ public class ItemSpawner : MonoBehaviour
     /// </summary>
     void Start()
     {
-        gameManager = GameObject.FindFirstObjectByType<GameManager>();
+        Initialize();    
     }
 
     // Update is called once per frame
