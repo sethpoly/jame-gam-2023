@@ -5,12 +5,26 @@ using UnityEngine;
 // An Oobject that can be updated by landing on a Conveyor
 public class ConveyorObject : MonoBehaviour
 {
-    private float speed = 0;
+    GameManager gameManager;
+    private bool onConveyor = false;
+
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    void Start()
+    {
+        gameManager = GameObject.FindFirstObjectByType<GameManager>();
+    }
+
     
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(speed * Vector2.right * Time.deltaTime);
+        if(onConveyor) 
+        {
+        transform.Translate(gameManager.currentDifficulty.conveyorSpeed * Vector2.right * Time.deltaTime);
+        }
     }
 
     /// <summary>
@@ -28,7 +42,7 @@ public class ConveyorObject : MonoBehaviour
         var conveyor = other.collider.GetComponent<ConveyorController>();
 
         // Start moving this object
-        speed = conveyor.speed;
+        onConveyor = true;
     }
 
     /// Sent when a collider on another object stops touching this
@@ -42,6 +56,6 @@ public class ConveyorObject : MonoBehaviour
         }
 
         // Stop moving object
-        speed = 0;
+        onConveyor = false;
     }
 }

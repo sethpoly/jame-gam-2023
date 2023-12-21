@@ -7,6 +7,7 @@ using Random=UnityEngine.Random;
 
 public class ItemSpawner : MonoBehaviour
 {
+    private GameManager gameManager;
     public GameObject giftPrefab;
     public GameObject coalPrefab;
     private float timePassed = 0f;
@@ -15,6 +16,15 @@ public class ItemSpawner : MonoBehaviour
     private ItemType lastItemDropped = ItemType.Coal;
     private int identicalItemDroppedInSequenceCount = 0;
     private readonly int maxIdenticalItemsToDrop = 3; // The max identical items we may drop in sequence of the conveyor
+
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    void Start()
+    {
+        gameManager = GameObject.FindFirstObjectByType<GameManager>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -78,6 +88,6 @@ public class ItemSpawner : MonoBehaviour
     }
 
     private float GetRandomTimeToWait() {
-        return Random.Range(.5f, 2.5f);
+        return Random.Range(gameManager.currentDifficulty.minItemSpawnTime, gameManager.currentDifficulty.maxItemSpawnTime);
     }
 }

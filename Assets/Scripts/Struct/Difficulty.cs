@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Difficulty
 {
-    float conveyorSpeed;
-    float minItemSpawnTime;
-    float maxItemSpawnTime;
-    float levelTimer;
-    Vector2 anvilSpawnerLocation;
+    public float conveyorSpeed;
+    public float minItemSpawnTime;
+    public float maxItemSpawnTime;
+    public float levelTimer;
+    public Vector2 anvilSpawnerLocation;
 
     public Difficulty(float conveyorSpeed, float minItemSpawnTime, float maxItemSpawnTime, float levelTimer, Vector2 anvilSpawnerLocation) {
         this.conveyorSpeed = conveyorSpeed;

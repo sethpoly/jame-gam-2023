@@ -12,13 +12,13 @@ public enum DifficultyLevel {
 
 public class GameManager : MonoBehaviour
 {
-    private List<Difficulty> difficulties = new()
+    private static readonly List<Difficulty> difficulties = new()
     {
         new Difficulty(conveyorSpeed: 5, minItemSpawnTime: .5f, maxItemSpawnTime: 2.5f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
-        new Difficulty(conveyorSpeed: 5, minItemSpawnTime: .5f, maxItemSpawnTime: 2.5f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
-        new Difficulty(conveyorSpeed: 5, minItemSpawnTime: .5f, maxItemSpawnTime: 2.5f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
-        new Difficulty(conveyorSpeed: 5, minItemSpawnTime: .5f, maxItemSpawnTime: 2.5f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
-        new Difficulty(conveyorSpeed: 5, minItemSpawnTime: .5f, maxItemSpawnTime: 2.5f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero)
+        new Difficulty(conveyorSpeed: 6, minItemSpawnTime: .5f, maxItemSpawnTime: 2.5f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
+        new Difficulty(conveyorSpeed: 7, minItemSpawnTime: .5f, maxItemSpawnTime: 2.5f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
+        new Difficulty(conveyorSpeed: 8, minItemSpawnTime: .5f, maxItemSpawnTime: 2.5f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
+        new Difficulty(conveyorSpeed: 9, minItemSpawnTime: .2f, maxItemSpawnTime: 1.2f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero)
     };
 
     public DifficultyLevel difficultyLevel;
@@ -34,6 +34,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        currentDifficulty = difficulties[(int)difficultyLevel];
     }
 }
