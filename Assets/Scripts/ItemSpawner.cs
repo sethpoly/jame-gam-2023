@@ -13,6 +13,10 @@ public class ItemSpawner : MonoBehaviour
     private float timePassed = 0f;
     private float timeToWait = 0f;
 
+    private ItemType lastItemDropped = ItemType.Coal;
+    private int identicalItemDroppedInSequenceCount = 0;
+    private int maxIdenticalItemsToDrop = 3; // The max identical items we may drop in sequence of the conveyor
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,11 +36,27 @@ public class ItemSpawner : MonoBehaviour
     }
 
     private void DropRandom() {
-        Array values = Enum.GetValues(typeof(ItemType));
-        System.Random random = new();
-        ItemType randomItem = (ItemType)values.GetValue(random.Next(values.Length));
+        ItemType nextItem = ItemType.Coal;
 
-        switch(randomItem) {
+        // Check if we dropped the same item the past X times
+        // If so, drop the opposite item type
+        if(identicalItemDroppedInSequenceCount >= maxIdenticalItemsToDrop) {
+            switch(lastItemDropped) {
+                case ItemType.Gift:
+                nextItem = ItemType.Coal;
+                break;
+                case ItemType.Coal:
+                nextItem = ItemType.Gift;
+                break;
+            }
+        } else {
+            // Else choose a random ItemType to drop
+            Array values = Enum.GetValues(typeof(ItemType));
+            System.Random random = new();
+            nextItem = (ItemType)values.GetValue(random.Next(values.Length));
+        }
+
+        switch(nextItem) {
             case ItemType.Gift: 
             DropGift();
             break;
@@ -44,6 +64,14 @@ public class ItemSpawner : MonoBehaviour
             DropCoal();
             break;
         }
+
+        // Increment flag so we can ensure we don't 
+        // keep spamming the same item on the conveyor
+        if(lastItemDropped == nextItem) {
+            identicalItemDroppedInSequenceCount++;
+        }
+
+        lastItemDropped = nextItem;
     }
 
     private void DropGift() {
