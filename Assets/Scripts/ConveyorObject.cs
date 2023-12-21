@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // An Oobject that can be updated by landing on a Conveyor
-public class ConveyorObject : MonoBehaviour
+public class ConveyorObject : GameManagerObservable
 {
-    GameManager gameManager;
     private bool onConveyor = false;
 
     /// <summary>
@@ -14,7 +13,7 @@ public class ConveyorObject : MonoBehaviour
     /// </summary>
     void Start()
     {
-        gameManager = GameObject.FindFirstObjectByType<GameManager>();
+        Initialize();
     }
 
     
@@ -34,7 +33,6 @@ public class ConveyorObject : MonoBehaviour
     /// <param name="other">The Collision2D data associated with this collision.</param>
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("Collison with " + other.collider.tag);
         if (!other.collider.CompareTag("Conveyor")) {
             return;
         }

@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour
     private PlayerInput playerInput;
 
     [SerializeField] AnvilSpawner anvilSpawner;
+    [SerializeField] float cooldown;
+
+    private float cooldownTimer;
+    private bool anvilReady = true;
     
     void Awake()
     {
@@ -25,7 +29,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        // Anvil Drop Cooldown Timer
+        if(!anvilReady) 
+        {
+            cooldownTimer += Time.deltaTime;
+            if(cooldownTimer > cooldown)
+            {
+                anvilReady = true;
+                cooldownTimer = 0;
+            } 
+        }
     }
 
     private void PlayerInput() 
@@ -36,6 +49,16 @@ public class PlayerController : MonoBehaviour
     private void OnDropPressed(InputAction.CallbackContext context)
     {
         Debug.Log("Drop pressed");
+        if(!anvilReady) 
+        { 
+            Debug.Log("Anvil not ready..");
+            return; 
+        }
+
         anvilSpawner.DropAnvil();
+
+        // Start cooldown
+        anvilReady = false;
+
     }
 }
