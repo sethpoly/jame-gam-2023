@@ -332,6 +332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anvilSpawner: {fileID: 2069162833}
+  cooldown: 0.4
 --- !u!4 &808893583
 Transform:
   m_ObjectHideFlags: 0
