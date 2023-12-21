@@ -1,19 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using Random=UnityEngine.Random;
 
 public class ItemSpawner : MonoBehaviour
 {
+    private GameManager gameManager;
     public GameObject giftPrefab;
     public GameObject coalPrefab;
-
     private float timePassed = 0f;
-    private float timeToWait = 2f;
+    private float timeToWait = 0f;
 
-    // Start is called before the first frame update
+    private ItemType lastItemDropped = ItemType.Coal;
+    private int identicalItemDroppedInSequenceCount = 0;
+    private readonly int maxIdenticalItemsToDrop = 3; // The max identical items we may drop in sequence of the conveyor
+
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
     void Start()
     {
-        
+        gameManager = GameObject.FindFirstObjectByType<GameManager>();
     }
 
     // Update is called once per frame
@@ -22,9 +32,49 @@ public class ItemSpawner : MonoBehaviour
         timePassed += Time.deltaTime;
         if(timePassed > timeToWait)
         {
-            DropGift();
+            DropRandom();
+            timeToWait = GetRandomTimeToWait();
             timePassed = 0f;
         } 
+    }
+
+    private void DropRandom() {
+        ItemType nextItem = ItemType.Coal;
+
+        // Check if we dropped the same item the past X times
+        // If so, drop the opposite item type
+        if(identicalItemDroppedInSequenceCount >= maxIdenticalItemsToDrop) {
+            switch(lastItemDropped) {
+                case ItemType.Gift:
+                nextItem = ItemType.Coal;
+                break;
+                case ItemType.Coal:
+                nextItem = ItemType.Gift;
+                break;
+            }
+        } else {
+            // Else choose a random ItemType to drop
+            Array values = Enum.GetValues(typeof(ItemType));
+            System.Random random = new();
+            nextItem = (ItemType)values.GetValue(random.Next(values.Length));
+        }
+
+        switch(nextItem) {
+            case ItemType.Gift: 
+            DropGift();
+            break;
+            case ItemType.Coal:
+            DropCoal();
+            break;
+        }
+
+        // Increment flag so we can ensure we don't 
+        // keep spamming the same item on the conveyor
+        if(lastItemDropped == nextItem) {
+            identicalItemDroppedInSequenceCount++;
+        }
+
+        lastItemDropped = nextItem;
     }
 
     private void DropGift() {
@@ -35,5 +85,9 @@ public class ItemSpawner : MonoBehaviour
     private void DropCoal() {
         Debug.Log("Dropping coal...");
         Instantiate(coalPrefab, transform);
+    }
+
+    private float GetRandomTimeToWait() {
+        return Random.Range(gameManager.currentDifficulty.minItemSpawnTime, gameManager.currentDifficulty.maxItemSpawnTime);
     }
 }
