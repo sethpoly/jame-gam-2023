@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum DifficultyLevel {
     One,
@@ -49,6 +52,8 @@ public class GameManager : MonoBehaviour
         new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Five), anvilSpawnLocation: AnvilSpawnLocation.End)
     };
 
+    public UnityEvent onNewLevelStart = new();
+
     public DifficultyLevel difficultyLevel;
     public Difficulty currentDifficulty;
     public Level _currentLevel;
@@ -67,19 +72,32 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         currentDifficulty = difficulties[(int)difficultyLevel];
+        currentLevel = levels[(int)_currentLevel];
     }
 
-    void nextLevel() 
+    void NextLevel() 
     {
-        Debug.Log("");
+        // Last level was reached, invoke end game
+        if(_currentLevel == Level.Five)
+        {
+            EndGame();
+            return;
+        }
+        Debug.Log("Starting Next Level: " + _currentLevel.Next());
 
-        // Destroy existing anvils/items
-        // Change current level
-        // Show level name UI
-        // Start conveyor
-        // Start item spawner
         // Invoke level start event
+        onNewLevelStart.Invoke();
 
+        // Change current level
+        _currentLevel = _currentLevel.Next();
+
+        // Show level name UI
+    }
+
+    void EndGame()
+    {
+        Debug.Log("Last level complete. Ending game");
+        // TODO:
     }
 
     static Difficulty GetDifficulty(DifficultyLevel difficultyLevel)
