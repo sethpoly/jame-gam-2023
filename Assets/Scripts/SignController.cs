@@ -35,12 +35,12 @@ public class SignController : GameManagerObservable
         }
 
         // Toggle sign on random timer
-        timePassed += Time.deltaTime;
-        if(timePassed > timeToWait)
-        {
-            ToggleSign();
-            timePassed = 0;
-        }
+        // timePassed += Time.deltaTime;
+        // if(timePassed > timeToWait)
+        // {
+        //     ToggleSign();
+        //     timePassed = 0;
+        // }
     }
 
     private void ToggleSign() 

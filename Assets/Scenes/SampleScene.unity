@@ -341,9 +341,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e9a8e9fa9f1499e86005b3766dbfa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficultyLevel: 0
-  anvilSpawnLocation: 2
-  currentItemToCrush: 0
+  onNewLevelStart:
+    m_PersistentCalls:
+      m_Calls: []
+  _currentLevel: 0
+  currentItemToCrush: 1
 --- !u!1 &640050369
 GameObject:
   m_ObjectHideFlags: 0
