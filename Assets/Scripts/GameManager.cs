@@ -10,6 +10,27 @@ public enum DifficultyLevel {
     Five
 }
 
+public enum Level 
+{
+    One,
+    Two,
+    Three,
+    Four,
+    Five,
+}
+
+public class LevelInstance
+{
+    public Difficulty difficulty;
+    public AnvilSpawnLocation anvilSpawnLocation;
+    
+    public LevelInstance(Difficulty difficulty, AnvilSpawnLocation anvilSpawnLocation)
+    {
+        this.difficulty = difficulty;
+        this.anvilSpawnLocation = anvilSpawnLocation;
+    }
+}
+
 public class GameManager : MonoBehaviour
 {
     private static readonly List<Difficulty> difficulties = new()
@@ -21,8 +42,17 @@ public class GameManager : MonoBehaviour
         new Difficulty(conveyorSpeed: 9, minItemSpawnTime: .15f, maxItemSpawnTime: 1f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero)
     };
 
+    private static readonly List<LevelInstance> levels = new()
+    {
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.One), anvilSpawnLocation: AnvilSpawnLocation.End),
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Three), anvilSpawnLocation: AnvilSpawnLocation.End),
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Five), anvilSpawnLocation: AnvilSpawnLocation.End)
+    };
+
     public DifficultyLevel difficultyLevel;
     public Difficulty currentDifficulty;
+    public Level _currentLevel;
+    public LevelInstance currentLevel;
     public AnvilSpawnLocation anvilSpawnLocation;
     public ItemType currentItemToCrush;
 
@@ -30,13 +60,31 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var index = (int)difficultyLevel;
-        currentDifficulty = difficulties[index];
+        currentDifficulty = GetDifficulty(difficultyLevel);
     }
 
     // Update is called once per frame
     void Update()
     {
         currentDifficulty = difficulties[(int)difficultyLevel];
+    }
+
+    void nextLevel() 
+    {
+        Debug.Log("");
+
+        // Destroy existing anvils/items
+        // Change current level
+        // Show level name UI
+        // Start conveyor
+        // Start item spawner
+        // Invoke level start event
+
+    }
+
+    static Difficulty GetDifficulty(DifficultyLevel difficultyLevel)
+    {
+        var index = (int)difficultyLevel;
+        return difficulties[index];
     }
 }
