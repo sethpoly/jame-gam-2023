@@ -87,6 +87,6 @@ public class ItemSpawner : GameManagerObservable
     }
 
     private float GetRandomTimeToWait() {
-        return Random.Range(gameManager.currentDifficulty.minItemSpawnTime, gameManager.currentDifficulty.maxItemSpawnTime);
+        return Random.Range(gameManager.currentLevel.difficulty.minItemSpawnTime, gameManager.currentLevel.difficulty.maxItemSpawnTime);
     }
 }

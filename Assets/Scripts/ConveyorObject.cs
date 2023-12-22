@@ -14,6 +14,7 @@ public class ConveyorObject : GameManagerObservable
     void Start()
     {
         Initialize();
+        gameManager.onNewLevelStart.AddListener(OnNewLevelStart);
     }
 
     
@@ -22,7 +23,7 @@ public class ConveyorObject : GameManagerObservable
     {
         if(onConveyor) 
         {
-        transform.Translate(gameManager.currentDifficulty.conveyorSpeed * Vector2.right * Time.deltaTime);
+            transform.Translate(gameManager.currentLevel.difficulty.conveyorSpeed * Vector2.right * Time.deltaTime);
         }
     }
 
@@ -36,8 +37,6 @@ public class ConveyorObject : GameManagerObservable
         if (!other.collider.CompareTag("Conveyor")) {
             return;
         }
-
-        var conveyor = other.collider.GetComponent<ConveyorController>();
 
         // Start moving this object
         onConveyor = true;
@@ -55,5 +54,11 @@ public class ConveyorObject : GameManagerObservable
 
         // Stop moving object
         onConveyor = false;
+    }
+
+    private void OnNewLevelStart()
+    {
+        gameManager.onNewLevelStart.RemoveListener(OnNewLevelStart);
+        Destroy(gameObject);
     }
 }
