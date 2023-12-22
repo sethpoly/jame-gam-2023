@@ -1,7 +1,18 @@
 using UnityEngine;
 
-public class Crushable : MonoBehaviour
+public class Crushable : GameManagerObservable
 {
+    public ItemType type;
+
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    void Start()
+    {
+        Initialize();
+    }
+
     /// <summary>
     /// Sent when another object enters a trigger collider attached to this
     /// object (2D physics only).
@@ -13,6 +24,12 @@ public class Crushable : MonoBehaviour
         if (!other.attachedRigidbody.CompareTag("Anvil")) {
             return;
         }
+        // Increment crushed item count if it matches
+        if(gameManager.currentItemToCrush == type) 
+        {
+            gameManager.IncrementCrushedItemsCount();
+        }
+
         Destroy(gameObject);
         
     }

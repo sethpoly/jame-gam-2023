@@ -26,11 +26,13 @@ public class LevelInstance
 {
     public Difficulty difficulty;
     public AnvilSpawnLocation anvilSpawnLocation;
+    public int itemsToCrush;
     
-    public LevelInstance(Difficulty difficulty, AnvilSpawnLocation anvilSpawnLocation)
+    public LevelInstance(Difficulty difficulty, AnvilSpawnLocation anvilSpawnLocation, int itemsToCrush)
     {
         this.difficulty = difficulty;
         this.anvilSpawnLocation = anvilSpawnLocation;
+        this.itemsToCrush = itemsToCrush;
     }
 }
 
@@ -47,21 +49,18 @@ public class GameManager : MonoBehaviour
 
     private static readonly List<LevelInstance> levels = new()
     {
-        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.One), anvilSpawnLocation: AnvilSpawnLocation.End),
-        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Three), anvilSpawnLocation: AnvilSpawnLocation.End),
-        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Five), anvilSpawnLocation: AnvilSpawnLocation.End)
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.One), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 8),
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Two), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 8),
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Three), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 10),
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Four), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 10),
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Five), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 10)
     };
 
     public UnityEvent onNewLevelStart = new();
     public Level _currentLevel;
     public LevelInstance currentLevel;
     public ItemType currentItemToCrush;
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    private int crushedItemsCount = 0;
 
     // Update is called once per frame
     void Update()
@@ -69,7 +68,18 @@ public class GameManager : MonoBehaviour
         currentLevel = levels[(int)_currentLevel];
     }
 
-    void NextLevel() 
+    public void IncrementCrushedItemsCount() 
+    {
+        crushedItemsCount++;
+
+        if(crushedItemsCount >= currentLevel.itemsToCrush)
+        {
+            NextLevel();
+            crushedItemsCount = 0;
+        }
+    }
+
+    private void NextLevel() 
     {
         // Last level was reached, invoke end game
         if(_currentLevel == Level.Five)
@@ -85,10 +95,22 @@ public class GameManager : MonoBehaviour
         // Change current level
         _currentLevel = _currentLevel.Next();
 
-        // Show level name UI
+        // TODO: Show level name UI
     }
 
-    void EndGame()
+    // TODO: Show restart UI
+    private void LevelFailed()
+    {
+        
+    }
+
+    // TODO: Restart current level
+    private void RestartLevel()
+    {
+
+    }
+
+    private void EndGame()
     {
         Debug.Log("Last level complete. Ending game");
         // TODO:
