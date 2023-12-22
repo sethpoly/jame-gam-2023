@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -55,6 +56,7 @@ public class GameManager : MonoBehaviour
         new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Four), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 10),
         new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Five), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 10)
     };
+    [SerializeField] Camera mainCamera;
 
     public UnityEvent onNewLevelStart = new();
     public Level _currentLevel;
@@ -77,6 +79,12 @@ public class GameManager : MonoBehaviour
             NextLevel();
             crushedItemsCount = 0;
         }
+    }
+
+    public void ScreenShake() 
+    {
+        var shaker = mainCamera.GetComponent<CameraShake>();
+        StartCoroutine(shaker.Shake(duration: .1f, magnitude: .3f));
     }
 
     private void NextLevel() 

@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
+    Vector3 originalPos;
+
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    void Start()
+    {
+        originalPos = transform.position;
+    }
+    
     public IEnumerator Shake(float duration, float magnitude)
     {
-        Vector3 originalPos = new Vector3(0, 0, 0);
+        Vector3 originalPos = transform.position;
         float elapsedTime = 0f;
 
         while(elapsedTime < duration)

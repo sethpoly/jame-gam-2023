@@ -40,6 +40,12 @@ public class ConveyorObject : GameManagerObservable
 
         // Start moving this object
         onConveyor = true;
+
+        // If object is anvil, initiate camera shake
+        if(CompareTag("Anvil"))
+        {
+            gameManager.ScreenShake();
+        }
     }
 
     /// Sent when a collider on another object stops touching this
