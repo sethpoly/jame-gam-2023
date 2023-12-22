@@ -23,7 +23,7 @@ public class ConveyorObject : GameManagerObservable
     {
         if(onConveyor) 
         {
-            transform.Translate(gameManager.currentDifficulty.conveyorSpeed * Vector2.right * Time.deltaTime);
+            transform.Translate(gameManager.currentLevel.difficulty.conveyorSpeed * Vector2.right * Time.deltaTime);
         }
     }
 

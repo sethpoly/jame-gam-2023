@@ -53,25 +53,19 @@ public class GameManager : MonoBehaviour
     };
 
     public UnityEvent onNewLevelStart = new();
-
-    public DifficultyLevel difficultyLevel;
-    public Difficulty currentDifficulty;
     public Level _currentLevel;
     public LevelInstance currentLevel;
-    public AnvilSpawnLocation anvilSpawnLocation;
     public ItemType currentItemToCrush;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        currentDifficulty = GetDifficulty(difficultyLevel);
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentDifficulty = difficulties[(int)difficultyLevel];
         currentLevel = levels[(int)_currentLevel];
     }
 
