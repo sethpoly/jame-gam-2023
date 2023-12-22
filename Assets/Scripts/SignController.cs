@@ -8,8 +8,8 @@ public class SignController : GameManagerObservable
     public Sprite giftSprite;
     public Sprite coalSprite;
 
-    private float timePassed = 0f;
-    private float timeToWait = 5f;
+    // private float timePassed = 0f;
+    // private float timeToWait = 5f;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
