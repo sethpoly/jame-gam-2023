@@ -6,8 +6,9 @@ using UnityEngine;
 public class ConveyorObject : GameManagerObservable
 {
     private bool onConveyor = false;
-
     private bool hasLanded = false;
+
+    public AudioSource anvilFallClip;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -46,6 +47,7 @@ public class ConveyorObject : GameManagerObservable
             {
                 if(!hasLanded) 
                 {
+                    anvilFallClip.Play();
                     gameManager.ScreenShake();
                     hasLanded = true;
                 }
