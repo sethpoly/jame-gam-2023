@@ -54,7 +54,7 @@ public class Crushable : GameManagerObservable
         boxCollider2D.enabled = false; // Disable collider
         Instantiate(explosionPrefab, transform);
         animator.Play("Explosion");
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(.6f);
         Destroy(gameObject);
     }
 }   
