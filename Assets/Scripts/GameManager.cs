@@ -132,9 +132,10 @@ public class GameManager : MonoBehaviour
         currentLevelFailed = true;
     }
 
-    // TODO: Restart current level
-    private void RestartLevel()
+    // Restart current level
+    public void RestartLevel()
     {
+        crushedItemsCount = 0;
         currentLevelFailed = false;
         onNewLevelStart.Invoke();
         StartCoroutine(StartConveyor());

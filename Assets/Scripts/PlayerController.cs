@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : GameManagerObservable
 {
     private PlayerInput playerInput;
 
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Initialize();
         playerInput.Map.Enable();
         PlayerInput();
     }
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
     private void PlayerInput() 
     {
         playerInput.Map.Drop.started += OnDropPressed;
+        playerInput.Map.Restart.started += OnRestartPressed;
     }
 
     private void OnDropPressed(InputAction.CallbackContext context)
@@ -60,5 +62,10 @@ public class PlayerController : MonoBehaviour
         // Start cooldown
         anvilReady = false;
 
+    }
+
+    private void OnRestartPressed(InputAction.CallbackContext context)
+    {
+        gameManager.RestartLevel();
     }
 }
