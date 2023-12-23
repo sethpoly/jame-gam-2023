@@ -179,7 +179,7 @@ SpriteRenderer:
   m_SortingLayerID: 834149485
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1294002576314679671, guid: 0be860a5d14f04036abe36de75798545, type: 3}
+  m_Sprite: {fileID: -3594851165320320337, guid: 5ac4959d1e8c24859bccd57befead243, type: 3}
   m_Color: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -199,8 +199,8 @@ Transform:
   m_GameObject: {fileID: 322332937}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.23, z: 0}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -386,7 +386,7 @@ Transform:
   m_GameObject: {fileID: 640050369}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.78, y: 1.24, z: 0}
+  m_LocalPosition: {x: -4.75, y: -0.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -699,12 +699,20 @@ PrefabInstance:
       value: ConveyorBelt
       objectReference: {fileID: 0}
     - target: {fileID: 6616946381160576831, guid: 06eea7a251b1449c3bebcab7ef266563, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6616946381160576831, guid: 06eea7a251b1449c3bebcab7ef266563, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6616946381160576831, guid: 06eea7a251b1449c3bebcab7ef266563, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.35
       objectReference: {fileID: 0}
     - target: {fileID: 6616946381160576831, guid: 06eea7a251b1449c3bebcab7ef266563, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.14
+      value: -2.04
       objectReference: {fileID: 0}
     - target: {fileID: 6616946381160576831, guid: 06eea7a251b1449c3bebcab7ef266563, type: 3}
       propertyPath: m_LocalPosition.z
