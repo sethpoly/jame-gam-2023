@@ -7,6 +7,7 @@ public class UIManager : GameManagerObservable
 {
     public GameObject levelTextObj;
     public GameObject coalCountTextObj;
+    public GameObject restartLevelObj;
 
     private TextMeshProUGUI levelText;
     private TextMeshProUGUI coalCountText;
@@ -35,5 +36,8 @@ public class UIManager : GameManagerObservable
         {
             coalCountText.SetText(gameManager.crushedItemsCount + "/" + gameManager.currentLevel.itemsToCrush);
         }
+
+        // Show Restart Level UI
+        restartLevelObj.SetActive(gameManager.currentLevelFailed);
     }
 }

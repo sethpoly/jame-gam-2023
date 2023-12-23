@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
     public ItemType currentItemToCrush;
     public bool conveyorBeltOn = false;
     public int crushedItemsCount = 0;
+    public bool currentLevelFailed = false;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -113,6 +114,8 @@ public class GameManager : MonoBehaviour
         // Invoke level start event
         onNewLevelStart.Invoke();
 
+        currentLevelFailed = false;
+
         // Change current level
         _currentLevel = _currentLevel.Next();
 
@@ -122,16 +125,20 @@ public class GameManager : MonoBehaviour
         // TODO: Show level name UI
     }
 
-    // TODO: Show restart UI
-    private void LevelFailed()
+    // Stop level & show restart UI
+    public void LevelFailed()
     {
-        
+        conveyorBeltOn = false;
+        currentLevelFailed = true;
     }
 
-    // TODO: Restart current level
-    private void RestartLevel()
+    // Restart current level
+    public void RestartLevel()
     {
-
+        crushedItemsCount = 0;
+        currentLevelFailed = false;
+        onNewLevelStart.Invoke();
+        StartCoroutine(StartConveyor());
     }
 
     private void EndGame()
