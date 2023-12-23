@@ -34,17 +34,22 @@ public class ConveyorObject : GameManagerObservable
     /// <param name="other">The Collision2D data associated with this collision.</param>
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (!other.collider.CompareTag("Conveyor")) {
-            return;
+        // Colliding with conveyor
+        if (other.collider.CompareTag("Conveyor")) {
+            // Start moving this object
+            onConveyor = true;
+
+            // If object is anvil, initiate camera shake
+            if(CompareTag("Anvil"))
+            {
+                gameManager.ScreenShake();
+            }
         }
 
-        // Start moving this object
-        onConveyor = true;
-
-        // If object is anvil, initiate camera shake
-        if(CompareTag("Anvil"))
+        // Colliding with sack
+        if (other.collider.CompareTag("Sack"))
         {
-            gameManager.ScreenShake();
+            Destroy(gameObject);
         }
     }
 
