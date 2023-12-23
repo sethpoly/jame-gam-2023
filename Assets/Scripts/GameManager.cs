@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
     public bool currentLevelFailed = false;
     public AudioSource coalIncrementClip;
     public AudioSource levelFailClip;
+    public AudioSource levelCompleteClip;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -91,6 +92,7 @@ public class GameManager : MonoBehaviour
         if(crushedItemsCount >= currentLevel.itemsToCrush)
         {
             conveyorBeltOn = false;
+            levelCompleteClip.Play();
             NextLevel();
             crushedItemsCount = 0;
         }
