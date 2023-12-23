@@ -9,7 +9,7 @@ public class Crushable : GameManagerObservable
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider2D;
     private Rigidbody2D rb;
-
+    public AudioSource crushClip;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -46,6 +46,7 @@ public class Crushable : GameManagerObservable
         boxCollider2D.enabled = false; // Disable collider
         Instantiate(explosionPrefab, transform);
         animator.Play("Explosion");
+        crushClip.Play();
         yield return new WaitForSecondsRealtime(.6f);
 
         // Increment crushed item count if it matches
