@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     public LevelInstance currentLevel;
     public ItemType currentItemToCrush;
     public bool conveyorBeltOn = false;
-    private int crushedItemsCount = 0;
+    public int crushedItemsCount = 0;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
