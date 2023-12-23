@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
     public LevelInstance currentLevel;
     public ItemType currentItemToCrush;
     private int crushedItemsCount = 0;
+    private int incorrectCrushedItemsCount = 0;
 
     // Update is called once per frame
     void Update()
@@ -81,6 +82,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void IncrementIncorrectCrushedItemsCount() 
+    {
+        incorrectCrushedItemsCount++;
+
+        // TODO: Max incorrect items?
+    }
+
     public void ScreenShake() 
     {
         var shaker = mainCamera.GetComponent<CameraShake>();
@@ -89,6 +97,9 @@ public class GameManager : MonoBehaviour
 
     private void NextLevel() 
     {
+        incorrectCrushedItemsCount = 0;
+        crushedItemsCount = 0;
+        
         // Last level was reached, invoke end game
         if(_currentLevel == Level.Five)
         {
