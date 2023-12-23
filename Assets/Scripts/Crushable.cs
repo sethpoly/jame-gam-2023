@@ -35,11 +35,6 @@ public class Crushable : GameManagerObservable
         if (!other.attachedRigidbody.CompareTag("Anvil")) {
             return;
         }
-        // Increment crushed item count if it matches
-        if(gameManager.currentItemToCrush == type) 
-        {
-            gameManager.IncrementCrushedItemsCount();
-        }
         StartCoroutine(Destroy());
     }
 
@@ -52,6 +47,13 @@ public class Crushable : GameManagerObservable
         Instantiate(explosionPrefab, transform);
         animator.Play("Explosion");
         yield return new WaitForSecondsRealtime(.6f);
+
+        // Increment crushed item count if it matches
+        if(gameManager.currentItemToCrush == type) 
+        {
+            gameManager.IncrementCrushedItemsCount();
+        }
+        
         Destroy(gameObject);
     }
 }   
