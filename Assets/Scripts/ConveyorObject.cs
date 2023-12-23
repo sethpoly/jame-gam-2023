@@ -7,6 +7,8 @@ public class ConveyorObject : GameManagerObservable
 {
     private bool onConveyor = false;
 
+    private bool hasLanded = false;
+
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
     /// any of the Update methods is called the first time.
@@ -42,7 +44,11 @@ public class ConveyorObject : GameManagerObservable
             // If object is anvil, initiate camera shake
             if(CompareTag("Anvil"))
             {
-                gameManager.ScreenShake();
+                if(!hasLanded) 
+                {
+                    gameManager.ScreenShake();
+                    hasLanded = true;
+                }
             }
         }
 
