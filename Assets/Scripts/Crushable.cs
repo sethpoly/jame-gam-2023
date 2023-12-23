@@ -52,6 +52,10 @@ public class Crushable : GameManagerObservable
         if(gameManager.currentItemToCrush == type) 
         {
             gameManager.IncrementCrushedItemsCount();
+        } 
+        else
+        {
+            gameManager.LevelFailed();
         }
         
         Destroy(gameObject);
