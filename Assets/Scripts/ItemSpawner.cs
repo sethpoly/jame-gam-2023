@@ -28,6 +28,7 @@ public class ItemSpawner : GameManagerObservable
     // Update is called once per frame
     void Update()
     {
+        if(!gameManager.conveyorBeltOn) { return; }
         timePassed += Time.deltaTime;
         if(timePassed > timeToWait)
         {

@@ -21,7 +21,7 @@ public class ConveyorObject : GameManagerObservable
     // Update is called once per frame
     void Update()
     {
-        if(onConveyor) 
+        if(onConveyor && gameManager.conveyorBeltOn) 
         {
             transform.Translate(gameManager.currentLevel.difficulty.conveyorSpeed * Vector2.right * Time.deltaTime);
         }

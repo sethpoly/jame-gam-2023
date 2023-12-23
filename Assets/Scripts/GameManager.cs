@@ -62,8 +62,17 @@ public class GameManager : MonoBehaviour
     public Level _currentLevel;
     public LevelInstance currentLevel;
     public ItemType currentItemToCrush;
+    public bool conveyorBeltOn = false;
     private int crushedItemsCount = 0;
-    private int incorrectCrushedItemsCount = 0;
+
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    void Start()
+    {
+        StartCoroutine(StartConveyor());
+    }
 
     // Update is called once per frame
     void Update()
@@ -77,16 +86,10 @@ public class GameManager : MonoBehaviour
 
         if(crushedItemsCount >= currentLevel.itemsToCrush)
         {
+            conveyorBeltOn = false;
             NextLevel();
             crushedItemsCount = 0;
         }
-    }
-
-    public void IncrementIncorrectCrushedItemsCount() 
-    {
-        incorrectCrushedItemsCount++;
-
-        // TODO: Max incorrect items?
     }
 
     public void ScreenShake() 
@@ -97,9 +100,8 @@ public class GameManager : MonoBehaviour
 
     private void NextLevel() 
     {
-        incorrectCrushedItemsCount = 0;
         crushedItemsCount = 0;
-        
+
         // Last level was reached, invoke end game
         if(_currentLevel == Level.Five)
         {
@@ -113,6 +115,9 @@ public class GameManager : MonoBehaviour
 
         // Change current level
         _currentLevel = _currentLevel.Next();
+
+        // Start conveyor after delay
+        StartCoroutine(StartConveyor());
 
         // TODO: Show level name UI
     }
@@ -133,6 +138,12 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Last level complete. Ending game");
         // TODO:
+    }
+
+    private IEnumerator StartConveyor()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        conveyorBeltOn = true;
     }
 
     static Difficulty GetDifficulty(DifficultyLevel difficultyLevel)
