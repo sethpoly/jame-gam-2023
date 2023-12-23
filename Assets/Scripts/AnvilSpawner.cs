@@ -15,11 +15,11 @@ public class AnvilSpawner : GameManagerObservable
     void Update()
     {
         // Fetch spawn location from gameManager
-        var locationX = gameManager.currentLevel.anvilSpawnLocation.GetAttributeOfType<AnvilSpawnLocationAttribute>().x;
-        var locationY = gameManager.currentLevel.anvilSpawnLocation.GetAttributeOfType<AnvilSpawnLocationAttribute>().y;
+        // var locationX = gameManager.currentLevel.anvilSpawnLocation.GetAttributeOfType<AnvilSpawnLocationAttribute>().x;
+        // var locationY = gameManager.currentLevel.anvilSpawnLocation.GetAttributeOfType<AnvilSpawnLocationAttribute>().y;
 
-        var position = new Vector3(x: locationX, y: locationY);
-        transform.position = position;
+        // var position = new Vector3(x: locationX, y: locationY);
+        // transform.position = position;
     }
 
     public void DropAnvil()

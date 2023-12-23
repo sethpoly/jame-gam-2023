@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -55,12 +56,23 @@ public class GameManager : MonoBehaviour
         new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Four), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 10),
         new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Five), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 10)
     };
+    [SerializeField] Camera mainCamera;
 
     public UnityEvent onNewLevelStart = new();
     public Level _currentLevel;
     public LevelInstance currentLevel;
     public ItemType currentItemToCrush;
+    public bool conveyorBeltOn = false;
     private int crushedItemsCount = 0;
+
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    void Start()
+    {
+        StartCoroutine(StartConveyor());
+    }
 
     // Update is called once per frame
     void Update()
@@ -74,13 +86,22 @@ public class GameManager : MonoBehaviour
 
         if(crushedItemsCount >= currentLevel.itemsToCrush)
         {
+            conveyorBeltOn = false;
             NextLevel();
             crushedItemsCount = 0;
         }
     }
 
+    public void ScreenShake() 
+    {
+        var shaker = mainCamera.GetComponent<CameraShake>();
+        StartCoroutine(shaker.Shake(duration: .1f, magnitude: .3f));
+    }
+
     private void NextLevel() 
     {
+        crushedItemsCount = 0;
+
         // Last level was reached, invoke end game
         if(_currentLevel == Level.Five)
         {
@@ -94,6 +115,9 @@ public class GameManager : MonoBehaviour
 
         // Change current level
         _currentLevel = _currentLevel.Next();
+
+        // Start conveyor after delay
+        StartCoroutine(StartConveyor());
 
         // TODO: Show level name UI
     }
@@ -114,6 +138,12 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Last level complete. Ending game");
         // TODO:
+    }
+
+    private IEnumerator StartConveyor()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        conveyorBeltOn = true;
     }
 
     static Difficulty GetDifficulty(DifficultyLevel difficultyLevel)

@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ConveyorController : MonoBehaviour
+public class ConveyorController : GameManagerObservable
 {
-    public float speed;
+    public SpriteRenderer powerLightRenderer;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        Initialize();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        powerLightRenderer.enabled = gameManager.conveyorBeltOn;
     }
 }

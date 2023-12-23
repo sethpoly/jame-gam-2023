@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: f4f3edfa901274fc6a9df2f197a66337
+guid: e7c02ef32ae10426faf4135361b98341
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4697458585294832170
-    second: coal (1)_0
+      213: 1210038620547075218
+    second: Crushed_Gift_0
+  - first:
+      213: 3183686729946321136
+    second: Crushed_Gift_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +103,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: coal (1)_0
+      name: Crushed_Gift_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 128
-        height: 128
+        x: 495
+        y: 946
+        width: 1115
+        height: 912
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,8 +117,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a228b93f1b9b03140800000000000000
-      internalID: 4697458585294832170
+      spriteID: 29c463ed6bbeac010800000000000000
+      internalID: 1210038620547075218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crushed_Gift_1
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 916
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f05396863abe2c20800000000000000
+      internalID: 3183686729946321136
       vertices: []
       indices: 
       edges: []
@@ -130,8 +154,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      coal (1)_0: 4697458585294832170
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
