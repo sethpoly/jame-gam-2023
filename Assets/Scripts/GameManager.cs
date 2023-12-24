@@ -1,10 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public enum DifficultyLevel {
     One,
@@ -75,6 +74,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Start()
     {
+        onNewLevelStart.Invoke();
         StartCoroutine(StartConveyor());
     }
 
@@ -126,8 +126,6 @@ public class GameManager : MonoBehaviour
 
         // Start conveyor after delay
         StartCoroutine(StartConveyor());
-
-        // TODO: Show level name UI
     }
 
     // Stop level & show restart UI
@@ -150,13 +148,20 @@ public class GameManager : MonoBehaviour
     private void EndGame()
     {
         Debug.Log("Last level complete. Ending game");
-        // TODO:
+        StartCoroutine(LoadEndGameScene());
     }
 
     private IEnumerator StartConveyor()
     {
         yield return new WaitForSecondsRealtime(2);
         conveyorBeltOn = true;
+    }
+
+    private IEnumerator LoadEndGameScene()
+    {
+        levelCompleteClip.Play();
+        yield return new WaitForSecondsRealtime(2f);
+        SceneManager.LoadScene("GameEnd");
     }
 
     static Difficulty GetDifficulty(DifficultyLevel difficultyLevel)
