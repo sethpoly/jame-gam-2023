@@ -1201,6 +1201,8 @@ MonoBehaviour:
   levelTextObj: {fileID: 1274004844}
   coalCountTextObj: {fileID: 950300787}
   restartLevelObj: {fileID: 2068541405}
+  levelStartObj: {fileID: 1399201642}
+  levelStartText: {fileID: 1999856026}
 --- !u!1 &950300787
 GameObject:
   m_ObjectHideFlags: 0
