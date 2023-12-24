@@ -377,9 +377,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to Santa's Workshop! Drop anvils to crush coal on the conveyor
-    and score points. Avoid gifts and spread joy. Can you become Santa's top coal
-    crusher? Start dropping anvils and find out!
+  m_text: 'Nobody is on the Naughty List this year! Drop anvils to crush bags of
+    coal. Avoid crushing gifts and spread the joy of the holidays! '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
