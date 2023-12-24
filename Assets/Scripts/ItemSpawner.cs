@@ -52,6 +52,7 @@ public class ItemSpawner : GameManagerObservable
                 nextItem = ItemType.Gift;
                 break;
             }
+            identicalItemDroppedInSequenceCount = 0;
         } else {
             // Else choose a random ItemType to drop
             Array values = Enum.GetValues(typeof(ItemType));
