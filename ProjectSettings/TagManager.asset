@@ -3,17 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Conveyor
+  - Anvil
+  - Sack
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Conveyor
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Background
+  - Crushable
+  - Anvil
   - 
   - 
   - 
@@ -38,6 +41,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 834149485
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
