@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Five), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 6),
         new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Five), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 7),
         new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Five), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 7),
-        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Expert), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 5)
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Expert), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 3)
 
     };
     [SerializeField] Camera mainCamera;
