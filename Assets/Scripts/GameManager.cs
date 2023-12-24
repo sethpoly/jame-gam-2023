@@ -116,13 +116,13 @@ public class GameManager : MonoBehaviour
         }
         Debug.Log("Starting Next Level: " + _currentLevel.Next());
 
-        // Invoke level start event
-        onNewLevelStart.Invoke();
-
         currentLevelFailed = false;
 
         // Change current level
         _currentLevel = _currentLevel.Next();
+
+        // Invoke level start event
+        onNewLevelStart.Invoke();
 
         // Start conveyor after delay
         StartCoroutine(StartConveyor());
