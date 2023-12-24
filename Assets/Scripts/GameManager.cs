@@ -65,6 +65,9 @@ public class GameManager : MonoBehaviour
     public bool conveyorBeltOn = false;
     public int crushedItemsCount = 0;
     public bool currentLevelFailed = false;
+    public AudioSource coalIncrementClip;
+    public AudioSource levelFailClip;
+    public AudioSource levelCompleteClip;
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -84,10 +87,12 @@ public class GameManager : MonoBehaviour
     public void IncrementCrushedItemsCount() 
     {
         crushedItemsCount++;
+        coalIncrementClip.Play();
 
         if(crushedItemsCount >= currentLevel.itemsToCrush)
         {
             conveyorBeltOn = false;
+            levelCompleteClip.Play();
             NextLevel();
             crushedItemsCount = 0;
         }
@@ -111,13 +116,13 @@ public class GameManager : MonoBehaviour
         }
         Debug.Log("Starting Next Level: " + _currentLevel.Next());
 
-        // Invoke level start event
-        onNewLevelStart.Invoke();
-
         currentLevelFailed = false;
 
         // Change current level
         _currentLevel = _currentLevel.Next();
+
+        // Invoke level start event
+        onNewLevelStart.Invoke();
 
         // Start conveyor after delay
         StartCoroutine(StartConveyor());
@@ -130,6 +135,7 @@ public class GameManager : MonoBehaviour
     {
         conveyorBeltOn = false;
         currentLevelFailed = true;
+        levelFailClip.Play();
     }
 
     // Restart current level

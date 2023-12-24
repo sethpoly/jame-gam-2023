@@ -8,9 +8,11 @@ public class UIManager : GameManagerObservable
     public GameObject levelTextObj;
     public GameObject coalCountTextObj;
     public GameObject restartLevelObj;
+    public GameObject levelStartObj;
 
     private TextMeshProUGUI levelText;
     private TextMeshProUGUI coalCountText;
+    public TextMeshProUGUI levelStartText;
 
 
     // Start is called before the first frame update
@@ -19,6 +21,8 @@ public class UIManager : GameManagerObservable
         Initialize();
         levelText = levelTextObj.GetComponent<TextMeshProUGUI>();
         coalCountText = coalCountTextObj.GetComponent<TextMeshProUGUI>();
+
+        gameManager.onNewLevelStart.AddListener(OnNewLevelStart);
     }
 
     // Update is called once per frame
@@ -40,4 +44,19 @@ public class UIManager : GameManagerObservable
         // Show Restart Level UI
         restartLevelObj.SetActive(gameManager.currentLevelFailed);
     }
+
+    private void OnNewLevelStart()
+    {
+        var levelNumber = (int)gameManager._currentLevel + 1;
+        levelStartObj.SetActive(true);
+        levelStartText.text = "Level " + levelNumber;
+        StartCoroutine(DismissLevelStartPanel());
+    }
+
+    private IEnumerator DismissLevelStartPanel()
+    {
+        yield return new WaitForSecondsRealtime(1.3f);
+        levelStartObj.SetActive(false);
+    }
+
 }
