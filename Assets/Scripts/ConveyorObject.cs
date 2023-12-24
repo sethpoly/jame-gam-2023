@@ -17,7 +17,10 @@ public class ConveyorObject : GameManagerObservable
     void Start()
     {
         Initialize();
-        gameManager.onNewLevelStart.AddListener(OnNewLevelStart);
+        if(gameManager != null)
+        {
+            gameManager.onNewLevelStart.AddListener(OnNewLevelStart);
+        }
     }
 
     
