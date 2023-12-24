@@ -14,7 +14,7 @@ public class ItemSpawner : GameManagerObservable
 
     private ItemType lastItemDropped = ItemType.Coal;
     private int identicalItemDroppedInSequenceCount = 0;
-    private readonly int maxIdenticalItemsToDrop = 3; // The max identical items we may drop in sequence of the conveyor
+    private readonly int maxIdenticalItemsToDrop = 5; // The max identical items we may drop in sequence of the conveyor
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -52,6 +52,7 @@ public class ItemSpawner : GameManagerObservable
                 nextItem = ItemType.Gift;
                 break;
             }
+            identicalItemDroppedInSequenceCount = 0;
         } else {
             // Else choose a random ItemType to drop
             Array values = Enum.GetValues(typeof(ItemType));

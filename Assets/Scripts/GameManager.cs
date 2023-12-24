@@ -1,17 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public enum DifficultyLevel {
     One,
     Two,
     Three,
     Four,
-    Five
+    Five,
+     Six,
+    Seven,
+    Eight,
+    Nine,
+    Expert
 }
 
 public enum Level 
@@ -21,6 +25,11 @@ public enum Level
     Three,
     Four,
     Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten
 }
 
 public class LevelInstance
@@ -44,17 +53,28 @@ public class GameManager : MonoBehaviour
         new Difficulty(conveyorSpeed: 5, minItemSpawnTime: .5f, maxItemSpawnTime: 2.5f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
         new Difficulty(conveyorSpeed: 6, minItemSpawnTime: .4f, maxItemSpawnTime: 2.0f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
         new Difficulty(conveyorSpeed: 7, minItemSpawnTime: .3f, maxItemSpawnTime: 1.5f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
-        new Difficulty(conveyorSpeed: 8, minItemSpawnTime: .2f, maxItemSpawnTime: 1.5f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
-        new Difficulty(conveyorSpeed: 9, minItemSpawnTime: .15f, maxItemSpawnTime: 1f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero)
+        new Difficulty(conveyorSpeed: 8, minItemSpawnTime: .2f, maxItemSpawnTime: 1f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
+        new Difficulty(conveyorSpeed: 8.5f, minItemSpawnTime: .15f, maxItemSpawnTime: .9f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
+        new Difficulty(conveyorSpeed: 9, minItemSpawnTime: .15f, maxItemSpawnTime: .9f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
+        new Difficulty(conveyorSpeed: 9.5f, minItemSpawnTime: .15f, maxItemSpawnTime: .9f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
+        new Difficulty(conveyorSpeed: 10, minItemSpawnTime: .2f, maxItemSpawnTime: 1f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
+        new Difficulty(conveyorSpeed: 11, minItemSpawnTime: .15f, maxItemSpawnTime: .9f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero),
+        new Difficulty(conveyorSpeed: 11.5f, minItemSpawnTime: .15f, maxItemSpawnTime: .9f, levelTimer: 15f, anvilSpawnerLocation: Vector2.zero)
     };
 
     private static readonly List<LevelInstance> levels = new()
     {
-        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.One), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 8),
-        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Two), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 8),
-        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Three), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 10),
-        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Four), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 10),
-        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Five), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 10)
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.One), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 5),
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Two), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 6),
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Three), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 7),
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Four), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 8),
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Five), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 5),
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Five), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 5),
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Five), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 6),
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Five), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 7),
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Five), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 7),
+        new LevelInstance(difficulty: GetDifficulty(DifficultyLevel.Expert), anvilSpawnLocation: AnvilSpawnLocation.End, itemsToCrush: 3)
+
     };
     [SerializeField] Camera mainCamera;
 
@@ -75,6 +95,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     void Start()
     {
+        onNewLevelStart.Invoke();
         StartCoroutine(StartConveyor());
     }
 
@@ -109,7 +130,7 @@ public class GameManager : MonoBehaviour
         crushedItemsCount = 0;
 
         // Last level was reached, invoke end game
-        if(_currentLevel == Level.Five)
+        if(_currentLevel == Level.Ten)
         {
             EndGame();
             return;
@@ -126,8 +147,6 @@ public class GameManager : MonoBehaviour
 
         // Start conveyor after delay
         StartCoroutine(StartConveyor());
-
-        // TODO: Show level name UI
     }
 
     // Stop level & show restart UI
@@ -150,13 +169,20 @@ public class GameManager : MonoBehaviour
     private void EndGame()
     {
         Debug.Log("Last level complete. Ending game");
-        // TODO:
+        StartCoroutine(LoadEndGameScene());
     }
 
     private IEnumerator StartConveyor()
     {
         yield return new WaitForSecondsRealtime(2);
         conveyorBeltOn = true;
+    }
+
+    private IEnumerator LoadEndGameScene()
+    {
+        levelCompleteClip.Play();
+        yield return new WaitForSecondsRealtime(2f);
+        SceneManager.LoadScene("GameEnd");
     }
 
     static Difficulty GetDifficulty(DifficultyLevel difficultyLevel)
